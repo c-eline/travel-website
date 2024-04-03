@@ -3,15 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celine's Travel Blog</title>
-    <link rel="stylesheet" href="/static/styles/styles.css">
+    <title>Fun facts</title>
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css styles linked here-->
+
+    <!--custom styles for this page-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f6e5ff; /* light purple */
+            text-align: center; /* Center all text */
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #ffd6f6; /* light pink */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+            text-align: left; /* Reset text alignment within the container */
+            display: inline-block;
+        }
+
+        h2 {
+            color: #9b59b6; /* purple */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left; /* Align form elements to the left */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #9b59b6; /* purple */
+            text-align: left; /* Align labels to the left */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 70%;
+            padding: 8px;
+            border: 1px solid #9b59b6; /* purple */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            display: inline; /* Display radio and checkbox inputs inline */
+        }
+
+        input[type="submit"] {
+            background-color: #e91e63; /* pink */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #d81b60; /* darker pink on hover */
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <header>
-        <nav class="top-nav">
+        <nav class="top-nav"> <!--top navigation bar-->
                 <a href="/">Home</a>
                 <div class="dropdown">
-                    <a href="/popdestinations" class="dropbtn">My Top Recommended Destinations To Visit</a>
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
                     <div class="dropdown-content">
                         <a href="/colombia">Visit Colombia</a>
                         <a href="/brazil">Visit Brazil</a>
@@ -19,21 +90,64 @@
                     </div>
                 </div>
 
-                    <a href="/traveltips">Travel Tips</a>
 
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
                 <div class="dropdown">
                     <a href="/getintouch" class="dropbtn">Get in Touch</a>
                     <div class="dropdown-content">
                         <a href="/feedbackform">Feedback Form</a>
-                        <a href="/quiz">Interesting Country Facts Quiz</a>
                         <a href="/travelstories">Submit Your Travel Story</a>
                         <a href="/contactus">Contact us</a>
                     </div>
                 </div>
-                    <a href="/login">Login To Your Profile</a>
+                    <a href="/login">Login</a>
                     <a href="/signup">Sign Up</a>
+        <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
 
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
         </nav>
     </header>
+
+    <div><h2>Interesting Facts about Countries in Latin America</h2></div>
+
+    <div class="container"> <!--name for css styling-->
+<!--Facts about Latin America-->
+    <div>
+        <p><h3>Colombia, the Emerald King: </h3><a href="https://www.selectlatinamerica.co.uk/destinations/">Colombia reigns supreme in the emerald world, producing over 90% of the world's emeralds. These precious gems come from the lush Andean mountains and have been prized for centuries.</a></p><br>
+    </div>
+    <div>
+        <p><h3>Angel Falls, Venezuela's Cascading Giant: </h3><a href="https://simple.wikipedia.org/wiki/Angel_Falls">Nestled in the heart of Canaima National Park, Venezuela boasts Angel Falls, the world's tallest uninterrupted waterfall. Plunging a staggering 3,280 feet (almost 1 kilometer!), the falls create a breathtaking spectacle and mist-filled environment.</a></p><br>
+    </div>
+    <div>
+        <p><h3>The Arid Atacama: Driest Non-Polar Desert: </h3><a href="https://en.wikipedia.org/wiki/Atacama_Desert">Spanning Chile and Peru, the Atacama Desert holds the title of the driest non-polar desert on Earth. Some areas receive virtually no rainfall, creating a unique landscape of salt flats, geysers, and otherworldly rock formations.</a></p><br>
+    </div>
+
+    <div>
+        <p><h3>Bolivia, a Landlocked High Achiever: </h3><a href="https://www.worldatlas.com/articles/the-largest-landlocked-countries-in-the-world.html">Despite having no coastline, Bolivia holds the distinction of being the highest, geographically locked country in the world. La Paz, its administrative capital, sits at a staggering 11,942 feet (3,640 meters) above sea level.</a></p><br>
+    </div>
+
+    <div>
+        <p><h3>Mexico City, Sinking Giant:  </h3><a href="https://www.chimuadventures.com/en/mexico">Mexico City, a sprawling metropolis with a rich history, is slowly sinking due to groundwater extraction.  The city subsides by an average of around 10 inches (25 centimeters) per year.</a></p><br>
+    </div>
+
+    <div>
+        <p><h3>The Amazon Rainforest: </h3><a href="https://www.wwf.org.uk/learn/fascinating-facts/amazon">Covers an enormous 6.7 million square kilometres, spanning 8 countries in South America and representing an area twice the size of India</a></p><br>
+    </div>
+
+    </div>
+
+
+
+
 </body>
 </html>

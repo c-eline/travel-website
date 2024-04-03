@@ -3,30 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backpacking Tips for South America</title>
-    <link rel="stylesheet" href="/static/styles/styles.css">
+     <title>Contact Us</title>
+    <!--<link rel="stylesheet" href="/static/styles/styles.css"> Style Sheet not linked to this page-->
 
+<!--custom styling for this page-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f6e5ff; /* light purple */
+        }
+        .top-nav {
+    background-color: #ff4da6; /* Pink header background */
+    flex: 1;    /* each heading takes up equal space*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.top-nav a:hover {
+    background-color: #ff80bf; /* Light pink hover color */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: inherit;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ff4da6; /* Pink dropdown background */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ff80bf; /* Light pink hover color */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #ffd6f6; /* light pink */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+        }
+        h2 {
+            color: #9b59b6; /* purple */
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #9b59b6; /* purple */
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #9b59b6; /* purple */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #e91e63; /* pink */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #d81b60; /* darker pink on hover */
+        }
+
+
+    </style>
 </head>
 <body>
-    <h1>Backpacking Tips for South America</h1>
-    <div class="tips-container">
-        <div class="tip">
-            <h2>Research and Plan</h2>
-            <p>Before setting off, research the countries you plan to visit, including their cultures, customs, visa requirements, and safety precautions. Plan a rough itinerary but remain flexible to accommodate unexpected opportunities or changes.</p>
-        </div>
-        <div class="tip">
-            <h2>Pack Light</h2>
-            <p>Remember, you'll be carrying everything on your back, so pack only the essentials. Opt for lightweight and versatile clothing suitable for varying climates, and invest in a good-quality, comfortable backpack.</p>
-        </div>
-        <div class="tip">
-            <h2>Pack Light</h2>
-            <p>Remember, you'll be carrying everything on your back, so pack only the essentials. Opt for lightweight and versatile clothing suitable for varying climates, and invest in a good-quality, comfortable backpack.</p>
-        </div>
-        <div class="tip">
-            <h2>Pack Light</h2>
-            <p>Remember, you'll be carrying everything on your back, so pack only the essentials. Opt for lightweight and versatile clothing suitable for varying climates, and invest in a good-quality, comfortable backpack.</p>
-        </div>
-        <!-- Add more tips following the same format -->
+<header>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+        <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Contact Us</h2>
+        <ul>
+            <li><p>Email: celine@live</p></li> <!--false email (to receive photos/exra travel info from users)-->
+        </ul>
+
     </div>
 </body>
 </html>

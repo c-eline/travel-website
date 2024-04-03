@@ -1,10 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Galápagos Islands</title>
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css styles linked here-->
+
 </head>
 <body>
-$END$
+<header>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+<form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+        </nav>
+    </header>
+    <h1>The Galápagos Islands</h1> <!--HEADING for this page-->
+    <div class="image-with-text">
+       <p><img src="static/images/sealions.jpeg" alt="Sea Lions on Santa Cruz island"></p></div>
+
+    <div class="image-with-text"> <!--info about the islands-->
+        <p>
+         <ul>
+             <br><br><li>The Galápagos Islands, where the theory of evolution was conceived. Exploring these volcanic islands, you witness firsthand the incredible diversity of species that call this place home.</li><br><br>
+             <li>It's not just the wildlife that makes the Galápagos Islands special, it's also the pristine beauty of its natural landscape. The crystal-clear waters alongside schools of tropical fish, or hiking through otherworldly lava fields adorned with cacti and endemic flora.</li><br> <br>
+             <li>From ancient giant tortoises and playful sea lions to vibrant marine iguanas and dazzling blue-footed boobies, the Galápagos teem with life</li><br><br>
+             <li>But perhaps what sets the Galápagos Islands apart more than anything else is their commitment to conservation and sustainability. These islands are not just a tourist destination; they're a global treasure that must be protected for future generations to enjoy.</li><br><br>
+             <li>In short, the Galápagos Islands are a once-in-a-lifetime experience.<br><br></li>
+
+        </ul></p>
+        <p><img src="static/images/isabela.jpeg" alt="Isabela beach"><br><br>
+    </div>
+ <!-- Comment form and display area for Galapagos -->
+<div class="comment-section" id="comment-section-gal">
+    <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="comment-form-container">
+
+    <form id="commentFormGal" action="/submit_comment_gal" method="POST">
+    <textarea name="comment" id="commentGal" class="form-control"></textarea>
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+    </div>
+
+    <!--Allow flash messages-->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+    {% endwith %}
+
+        <div><h2>Comments</h2></div>
+    <!--  Display area for comments -->
+    <div id="comment-list" class="comment-list">
+
+        <!--link to click 'view comments' to see previous comments by users-->
+        <a href="{{ url_for('get_gal_comments') }}" id="viewCommentsLink">View Comments</a>
+
+    <ul>
+
+        <!--fetch comments-->
+        {% for comment in comments %}
+
+        <!-- comment[1] is the username and comment[2] is the comment text, |e to protect against XSS attacks -->
+    <li>{{ comment[0]|e }} - {{ comment[1]|e }}</li>
+
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+
+<!--this script handles the event of the above link getting clicked-->
+<script>
+    document.getElementById('viewCommentsLink').addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        //fetch request for the comments in the galapagos comments database table
+        fetch('/get_gal_comments')
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved comments (data)
+                const commentList = document.getElementById('comment-list');
+                commentList.innerHTML = '';  // Clear existing content
+
+                // Loop through comments and add them to the list
+                for (const comment of data) {
+                    const commentItem = document.createElement('li');
+                    commentItem.innerText = `${comment[0]} - ${comment[1]}`;  // Username is at index 0 and Comment text is at index 1
+
+                    commentList.appendChild(commentItem);   //add comment to list
+                }
+            })
+            .catch(error => console.error(error));  //catch errors that are found
+    });
+</script>
 </body>
 </html>

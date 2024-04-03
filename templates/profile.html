@@ -1,10 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi, {{ username|e }}!</title>
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css styles linked here-->
+
+    <!--custom styles for this page-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f6e5ff; /* light purple */
+            text-align: center; /* Center all text */
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #ffd6f6; /* light pink */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+            text-align: left; /* Reset text alignment within the container */
+            display: inline-block;
+        }
+
+        h2 {
+            color: #9b59b6; /* purple */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left; /* Align form elements to the left */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #9b59b6; /* purple */
+            text-align: left; /* Align labels to the left */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 70%;
+            padding: 8px;
+            border: 1px solid #9b59b6; /* purple */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            display: inline; /* Display radio and checkbox inputs inline */
+        }
+
+        input[type="submit"] {
+            background-color: #e91e63; /* pink */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #d81b60; /* darker pink on hover */
+        }
+
+        .log-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #e91e63; /* pink */
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        }
+
+        .log-btn:hover {
+            background-color: #d81b60; /* darker pink on hover */
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-$END$
+<header>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+        <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+        </nav>
+    </header>
+<!--allow flash messages-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<div class="container">
+<h1>Welcome, {{ username|e }}</h1> <!--Username, escaped with jinja to prevent XSS attacks-->
+
+<table>
+    <tr>
+
+        <th>First Name</th>
+        <td>{{ fname|e }}</td>      <!--Users firstname, escaped with jinja, to potect against XSS attack-->
+    </tr>
+
+    </tr>
+    <tr>
+        <th>Family Name</th>
+        <td>{{ lname|e }}</td> <!--Users last name, escaped with jinja to prevent XSS attacks-->
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{ email|e }}</td> <!--Users email, escaped with jinja to prevent XSS attacks-->
+    </tr>
+    <tr>
+        <th>Gender</th>
+        <td><!--depending on gender different pictures shown on profiles-->
+            {%if gender=='Male' -%}
+                <img src="static/images/male.png" width="50" height="50"/>
+            {%else -%}
+                <img src="static/images/female.png" width="50" height="50"/>
+            {%endif%}
+
+        </td>
+    </tr>
+    <tr><!--heading-->
+        <th>Known Languages</th><br>
+        <td>
+            <ul><br><br>
+                <!--Display users known languages from database-->
+                {%for language in known_languages %}
+                    <li>{{ language }}</li>
+                {%endfor%}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Bio</th>
+        <td>
+            {{ bio|e }}     <!--Users bio, escaped with jinja to prevent XSS attacks-->
+        </td>
+    </tr>
+</table>
+</div>
+<br><br>
+<a href="/logout" class="log-btn">Log Out</a> <!--Log Out button-->
+<a href="/update_profile" class="log-btn">Edit Profile</a> <!--Button to edit profile-->
+<br><br>
+<!-- Delete account button (removes user from database) -->
+<form action="{{ url_for('delete_account') }}" method="post">
+    <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+</form>
 </body>
 </html>

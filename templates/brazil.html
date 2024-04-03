@@ -1,10 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brazil</title>
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css stylesheet-->
 </head>
 <body>
-$END$
+<header>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+        <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+        </nav>
+    </header>
+
+
+    <div class="image-with-text"> <!--class for css styling to organise pictures/text on page-->
+        <p><img src="static/images/beachbrazil1.jpeg" alt="Beach on ilha grande">
+        <h2>Brazil</h2> <!--heading for page-->
+        <ul>
+            <li>Brazil is home to some of the world's most breathtaking natural wonders, including the Amazon Rainforest, the Pantanal wetlands, the Iguazu Falls, and the stunning coastline with its pristine beaches.</li><br>
+            <li>Brazilian cuisine is diverse and flavorful, with influences from various cultures. Visitors can indulge in traditional dishes like feijoada, churrasco (barbecue), acarajé, and brigadeiro, as well as a wide range of tropical fruits.</li><br>
+            <li>Brazil is famous for its beautiful beaches, with thousands of miles of coastline offering everything from secluded coves to bustling urban shores. Destinations like Copacabana Beach in Rio de Janeiro and Praia do Forte in Bahia are particularly popular.</li>
+
+        </ul></p>
+    </div>
+    <div>
+
+
+        <img src="static/images/brazilbeach.jpeg" alt="Beach in RJ" class="centered-image"><br> <!--to center image-->
+        <p>The above image is Trinidade beach, close to Paraty & to the left is a beach on Ilha grande. Below is Ipanema beach in the city of Rio de Janeiro.</p>
+        <img src="static/images/riobeach.jpeg" alt="Beach on ilha grande" class="centered-image">
+    </div>
+
+
+    <!-- Display area for comments -->
+    <div class="comment-display-container">
+        <ul id="commentsBrazil">
+            <!-- Comments will be added here -->
+            {% for comment in comments %}
+    <li><strong>{{ comment.Username }}</strong>: {{ comment.Comment }}</li>
+    {% endfor %}
+        </ul>
+    </div>
+ <div class="comment-section" id="comment-section-brazil">
+    <div class="comment-form-container">
+
+    <form id="commentFormBrazil" action="/submit_comment_brazil" method="POST">
+        <!--<label for="commentColombia">Comment:</label><br>-->
+    <textarea name="comment" id="commentBrazil" class="form-control"></textarea>
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+    </div>
+
+    <!--allow flash messages-->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+    {% endwith %}
+
+   <!--  Display area for comments -->
+        <div><h2>Comments</h2></div>
+    <div id="comment-list" class="comment-list">
+
+   <!--  link to view previous comments -->
+        <a href="{{ url_for('get_brazil_comments') }}" id="viewCommentsLink">View Comments</a>
+
+    <ul>
+            <!--fetch comments-->
+        {% for comment in comments %}
+
+        <!--comment[1] is the username and comment[2] is the comment text, |e to protect against XSS attacks -->
+    <li>{{ comment[0]|e }} - {{ comment[1]|e }}</li>
+
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+
+<script> //Event handler listens for a clicked link (user clicks 'view comments')
+    document.getElementById('viewCommentsLink').addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        //fetch request for the comments in the brazil comments database table
+        fetch('/get_brazil_comments')
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved comments (data)
+                const commentList = document.getElementById('comment-list');
+                commentList.innerHTML = '';  // Clear existing content
+
+                // Loop through comments and add them to the list
+                for (const comment of data) {
+                    const commentItem = document.createElement('li');
+                    commentItem.innerText = `${comment[0]} - ${comment[1]}`;  // Assuming username is at index 0 and comment text at index 1
+
+                    commentList.appendChild(commentItem);   //adds the list item to the list
+                }
+            })
+            .catch(error => console.error(error));      //catches any errors
+    });
+</script>
 </body>
 </html>

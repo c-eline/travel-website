@@ -1,10 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia</title>
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css stylesheet-->
 </head>
 <body>
-$END$
+<header>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+        <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+        </nav>
+    </header>
+    <div><p><img src="static/images/providencia.jpeg" alt="Providencia island, Colombia"></p></div>
+    <div class="image-with-text"> <!--class for styling with css (to place image and text closer-->
+        <p><img src="static/images/barichara.jpeg" alt="Town of Barichara">
+        <h2>Colombia</h2> <!--heading for the page-->
+        <p>Let me introduce you to Colombia – a country that's bursting with flavor, colour, and endless opportunities for fun. Picture this: lush green mountains, palm-fringed beaches, and cities bursting with energy. Intrigued? Here are some reasons why Colombia should definitely be on your radar:</p>
+         <ul>
+             <li><b>Stunning Islands & Beaches: </b>Colombia's islands boast some of the most breathtaking beaches in the Caribbean region. With powdery white sands, crystal-clear turquoise waters, and swaying palm trees, these beaches are picture-perfect paradises that draw visitors seeking relaxation and rejuvenation.The picture of the beach above was taken on Providencia island, which is very small and a little difficult to get to but 100% worth it.<br><br></li>
+             <li><b>Coffee Culture: </b>Salento, located in the heart of Colombia's Coffee Triangle, offers stunning landscapes of lush green hills dotted with coffee plantations. The charming town is ready to be explored, hike in the Cocora Valley to see the wax palms - tallest palm trees in the world, and learn about the coffee-making process on a tour of a coffee farm.<br><br></li>
+             <li><b>Amazonas: </b>Colombia's portion of the Amazon Rainforest in the southern part of the country offers unparalleled biodiversity and opportunities for eco-adventures. Visitors can embark on guided jungle treks, spot exotic wildlife such as monkeys and colorful birds, visit indigenous communities to learn about their traditions, and explore the winding waterways by boat.<br><br></li>
+             <li><b>Warm Hospitality: </b> Colombians are known for their warmth and friendliness, making visitors feel welcome and at home wherever they go. Colombians also speak Spanish quite clearly and slowly (in comparison to other Spanish-speaking countries). So, it can be a great first country to visit if you are just starting to learn Spanish.<br><br></li>
+             <li><b>Adventure Activities: </b>Colombia's diverse landscapes offer so many opportunities for outdoor adventure. Whether it's hiking to remote waterfalls in the Sierra Nevada de Santa Marta, paragliding over the lush valleys of San Gil, or scuba-diving in the Caribbean Sea. Having tried all of the above, I would recommend each one! <br><br></li>
+
+
+
+        </ul>
+    </div>
+    <div>
+        <img src="static/images/mincasunset.jpeg" alt="Sunset in Minca, town in northern Colombia" class="centered-image"><br>
+    </div>
+
+
+  <!-- Comment form and display area for Colombia -->
+    <div class="comment-section" id="comment-section-colombia">
+    <div class="comment-form-container">
+
+    <form id="commentFormColombia" action="/submit_comment_colombia" method="POST">
+        <!--<label for="commentColombia">Comment:</label><br>-->
+    <textarea name="comment" id="commentColombia" class="form-control"></textarea>
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+    </div>
+<!--Allow flash messages-->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+    {% endwith %}
+
+        <div><h2>Comments</h2></div>
+
+           <!--  Display area for comments -->
+    <div id="comment-list" class="comment-list">
+
+        <!--link for viewing previous comments left by users ('view comments')-->
+        <a href="{{ url_for('get_colombia_comments') }}" id="viewCommentsLink">View Comments</a>
+
+    <ul>
+        <!--fetch comments-->
+        {% for comment in comments %}
+
+        <!-- comment[1] is the username and comment[2] is the comment text, |e to protect against XSS attacks -->
+    <li>{{ comment[0]|e }} - {{ comment[1]|e }}</li>
+
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+
+<!--event handler listens for above link to be clicked-->
+<script>
+    document.getElementById('viewCommentsLink').addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        //fetch request for the comments in the colombia comments database table
+        fetch('/get_colombia_comments')
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved comments (data)
+                const commentList = document.getElementById('comment-list');
+                commentList.innerHTML = '';  // Clear existing content
+
+                // Loop through comments and add them to the list
+                for (const comment of data) {
+                    const commentItem = document.createElement('li');
+                    commentItem.innerText = `${comment[0]} - ${comment[1]}`;  // Assuming username is at index 0 and comment text at index 1
+
+                    commentList.appendChild(commentItem);   //add comment to list
+                }
+            })
+            .catch(error => console.error(error));  //catch errors
+    });
+</script>
+
+
+
 </body>
 </html>

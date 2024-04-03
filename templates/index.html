@@ -4,55 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celine's Travel Blog</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css styles linked here-->
+
+<!--custom styles for this page-->
+<style>
+        /* CSS to center the paragraph */
+        .center {
+            text-align: center; /* Center text horizontally */
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#popdestinations">Destinations</a></li>
-                <li><a href="#colombia">Services</a></li>
-                <li><a href="#contact">Contact us</a></li>
-            </ul>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+
+            <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+
         </nav>
     </header>
 
     <section id="home" class="hero">
-        <h1>Welcome to the Website</h1>
-        <p>Your introduction or tagline goes here.</p>
-        <a href="#about">Learn More</a>
+        <h1>Welcome to my travel blog</h1>
+        <div class="container">
+        <p><img src="static/images/machupicchu.jpeg" alt="Machu Picchu, Peru"></p>
+    </div>
+
     </section>
 
     <section id="about">
-        <h2>About Us</h2>
-        <p>A brief paragraph about your organization, history, or mission.</p>
+        </section>
+
+    <section id="contact"style="text-align: center;">
+        <h2>About Me</h2>
+        <p>I enjoy travelling to new places and recently spent a year exploring Latin America. Throughout my travels, I've gathered valuable knowledge and tips that I hope to share with others through this website. </p>
+
+        <h2>How to get in touch with me:</h2>
+        <a href="/contactus"><b>Learn More</b></a>
     </section>
 
-    <section id="services">
-        <h2>Our Services</h2>
-        <div>
-            <h3>Service 1</h3>
-            <p>Description of service 1.</p>
-        </div>
-        <div>
-            <h3>Service 2</h3>
-            <p>Description of service 2.</p>
-        </div>
-        <!-- Add more services as needed -->
-    </section>
-
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>How to get in touch with us.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    <footer style="text-align: center;">
+        <p>&copy; 2024. </p>
     </footer>
-
-    <script src="scripts.js"></script> <!-- Link to your JavaScript file -->
 
 </body>
 </html>

@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore these destinations</title>
+    <link rel="stylesheet" href="/static/styles/styles.css"> <!--css styles linked here-->
 </head>
 <body>
-$END$
+<header>
+        <nav class="top-nav"> <!--top navigation bar-->
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/popdestinations" class="dropbtn">Explore</a>
+                    <div class="dropdown-content">
+                        <a href="/colombia">Visit Colombia</a>
+                        <a href="/brazil">Visit Brazil</a>
+                        <a href="/galapagos">Visit The Galápagos Islands</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+
+                    <a href="/traveltips">Travel Tips</a>
+                    <div class="dropdown-content">
+
+                        <a href="/facts">Interesting Facts About Latam Countries</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="/getintouch" class="dropbtn">Get in Touch</a>
+                    <div class="dropdown-content">
+                        <a href="/feedbackform">Feedback Form</a>
+                        <a href="/travelstories">Submit Your Travel Story</a>
+                        <a href="/contactus">Contact us</a>
+                    </div>
+                </div>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+        <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <script src="static/script.js" defer></script> <!-- Link to my JavaScript file -->
+        </nav>
+    </header>
+
+<div>
+    <div class="list-container"> <!--Photos of different countries to visit their separate pages-->
+        <ul>
+            <br><br><br><p><a href="/colombia"><b>Colombia</b></a></p>
+                <img src="static/images/coldesert.jpeg" alt="Desert in Colombia" width="450" height="350">
+        </ul>
+
+        <ul>
+            <br><br><br><p><a href="/brazil"><b>Brazil</b></a></p>
+                    <img src="static/images/iguazufalls.jpeg" alt="Iguazu Falls"width="450" height="350">
+        </ul>
+
+        <ul>
+            <br><br><br><p><a href="/galapagos"><b>Galápagos</b></a></p>
+            <img src="static/images/sealions.jpeg" alt="sea lions at beach on santa cruz beach" width="450" height="350">
+        </ul>
+
+</div>
 </body>
 </html>
